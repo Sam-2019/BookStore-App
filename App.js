@@ -1,14 +1,12 @@
 import "react-native-gesture-handler";
 import * as React from "react";
-import { View, Text } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
+import List from "./List";
 
 function Main() {
   return (
     <PaperProvider>
-      <View>
-        <Text>Hello</Text>
-      </View>
+      <List />
     </PaperProvider>
   );
 }
