@@ -8,6 +8,8 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+loki.txt
+useAsyncStorage.js
 
 # macOS
 .DS_Store
