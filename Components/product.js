@@ -1,21 +1,26 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
-import { Card } from "react-native-paper";
+import { StyleSheet, View, Image, Text } from "react-native";
+import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 
-export default function Product({ title }) {
+export default function Product({ sku, image }) {
   return (
     <View style={styles.card}>
-      <Card>
-        <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
-        <Card.Title title="Hello" subtitle="Card Subtitle" />
-      </Card>
+      <Image source={{ uri: image }} style={{ width: 170, height: 250 }} />
+      <View>
+        <Text style={styles.text}>{sku}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    paddingHorizontal: 8,
-    paddingVertical: 6,
+    flex: 1,
+    justifyContent: "center",
+  },
+  text: {
+    textAlign: "center",
+    textTransform: "capitalize",
+    fontSize: 15,
   },
 });
