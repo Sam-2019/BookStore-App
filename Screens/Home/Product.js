@@ -19,8 +19,6 @@ export default function ProductScreen() {
     variables: { sku: route.params.sku },
   });
 
-  console.log(data);
-
   if (loading) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
