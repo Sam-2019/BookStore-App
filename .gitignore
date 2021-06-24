@@ -9,7 +9,6 @@ npm-debug.*
 *.orig.*
 web-build/
 loki.txt
-List.js
 useAsyncStorage.js
 HomeActivity.js
 List.js

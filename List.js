@@ -32,13 +32,13 @@ const item = [
 ];
 
 const ItemCard = ({ title }) => (
-    <View style={styles.card}>
-      <Card>
-        <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
-        <Card.Title title={title} subtitle="Card Subtitle" />
-      </Card>
-    </View>
-  );
+  <View style={styles.card}>
+    <Card>
+      <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+      <Card.Title title={title} subtitle="Card Subtitle" />
+    </Card>
+  </View>
+);
 
 function List() {
   const renderItem = ({ item }) => (
@@ -60,7 +60,7 @@ function List() {
   );
 }
 
-export default List
+export default List;
 
 const styles = StyleSheet.create({
   container: {
