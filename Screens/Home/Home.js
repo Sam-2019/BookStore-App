@@ -1,11 +1,25 @@
 import * as React from "react";
-import { Text, View } from "react-native";
-import Product from "../../Components/product";
+import { createStackNavigator } from "@react-navigation/stack";
+import ProductsScreen from "./ProductList";
+import ProductScreen from "./Product";
 
-export default function HomeScreen() {
+const Stack = createStackNavigator();
+
+export default function HomeStack() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Product />
-    </View>
+    <Stack.Navigator initialRouteName="Products">
+      <Stack.Screen name="Products" component={ProductsScreen} />
+      <Stack.Screen
+        name="Product"
+        component={ProductScreen}
+        options={({ route }) => ({
+          title: route.params.sku,
+          headerTintColor: "black",
+          headerTitleStyle: {
+            textTransform: "capitalize",
+          },
+        })}
+      />
+    </Stack.Navigator>
   );
 }
