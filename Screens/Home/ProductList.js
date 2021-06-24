@@ -17,8 +17,6 @@ export default function ProductsScreen() {
 
   let content;
 
-  function viewProduct(sku) {}
-
   if (loading) {
     content = (
       <View>
