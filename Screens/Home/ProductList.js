@@ -1,13 +1,16 @@
 import * as React from "react";
-import { StyleSheet, View, Text, FlatList, Pressable } from "react-native";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import { StyleSheet, View, FlatList, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "@apollo/client";
-import { GET_PRODUCTS } from "../../graphql functions";
-import Product from "../../Components/product";
+
+import { GET_PRODUCTS }  from "../../graphqlFunctions";
+import Product from "../../Components/productItem";
+import Error from "../../Components/error";
+import ActivityIndicator from "../../Components/activityIndicator";
 
 export default function ProductsScreen() {
   const navigation = useNavigation();
+  
   const { loading, data, error } = useQuery(GET_PRODUCTS, {
     variables: {
       offset: 1,
@@ -15,26 +18,16 @@ export default function ProductsScreen() {
     },
   });
 
-  let content;
-
   if (loading) {
-    content = (
-      <View>
-        <ActivityIndicator animating={true} color={Colors.red800} />
-      </View>
-    );
+    return <ActivityIndicator />;
   }
 
   if (error) {
-    content = (
-      <View>
-        <Text>Error</Text>
-      </View>
-    );
+    return <Error />;
   }
 
   const renderItem = ({ item }) => (
-    <View style={styles.GridViewContainer}>
+    <View style={styles.item}>
       <Pressable
         onPress={() =>
           navigation.navigate("Product", {
@@ -47,18 +40,16 @@ export default function ProductsScreen() {
     </View>
   );
 
-  if (data) {
-    content = (
+  return (
+    <View style={styles.container}>
       <FlatList
         data={data.products.data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={2}
       />
-    );
-  }
-
-  return <View style={styles.container}>{content}</View>;
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -67,7 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#e5e5e5",
   },
-  GridViewContainer: {
+  item: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
