@@ -1,16 +1,12 @@
 import * as React from "react";
-import { ScrollView, View, Text } from "react-native";
-import {
-  Card,
-  ActivityIndicator,
-  Colors,
-  Button,
-  Title,
-  Paragraph,
-} from "react-native-paper";
+import { ScrollView, View } from "react-native";
+import { Card, Button, Paragraph } from "react-native-paper";
 import { useRoute } from "@react-navigation/native";
 import { useQuery } from "@apollo/client";
-import { GET_PRODUCT } from "../../graphql functions";
+
+import { GET_PRODUCT }  from "../../graphqlFunctions";
+import Error from "../../Components/error";
+import ActivityIndicator from "../../Components/activityIndicator";
 
 export default function ProductScreen() {
   const route = useRoute();
@@ -20,19 +16,11 @@ export default function ProductScreen() {
   });
 
   if (loading) {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator animating={true} color={Colors.red800} />
-      </View>
-    );
+    return <ActivityIndicator />;
   }
 
   if (error) {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Error</Text>
-      </View>
-    );
+    return <Error />;
   }
 
   return (
