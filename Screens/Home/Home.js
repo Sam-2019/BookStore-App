@@ -1,5 +1,6 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import ProductsScreen from "./ProductList";
 import ProductScreen from "./Product";
 
