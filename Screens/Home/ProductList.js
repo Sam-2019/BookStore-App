@@ -3,14 +3,15 @@ import { StyleSheet, View, FlatList, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "@apollo/client";
 
-import { GET_PRODUCTS }  from "../../graphqlFunctions";
+import { GET_PRODUCTS } from "../../graphqlFunctions";
 import Product from "../../Components/productItem";
 import Error from "../../Components/error";
+import Empty from "../../Components/empty";
 import ActivityIndicator from "../../Components/activityIndicator";
 
 export default function ProductsScreen() {
   const navigation = useNavigation();
-  
+
   const { loading, data, error } = useQuery(GET_PRODUCTS, {
     variables: {
       offset: 1,
@@ -24,6 +25,10 @@ export default function ProductsScreen() {
 
   if (error) {
     return <Error />;
+  }
+
+  if (data.products.length === 0) {
+    return <Empty />;
   }
 
   const renderItem = ({ item }) => (
