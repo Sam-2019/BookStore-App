@@ -15,7 +15,6 @@ export default function CartItem({
 }) {
   const navigation = useNavigation();
 
-
   const viewItem = () => {
     navigation.navigate("Product", {
       sku: sku,
