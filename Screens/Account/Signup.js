@@ -40,8 +40,7 @@ export default function Signup() {
   };
 
   const submit = async () => {
-    setMessage("");
-    let empty = firstname && lastname && email && password;
+    let empty = firstName && lastName && email && password;
 
     if (empty === "") {
     }
