@@ -6,6 +6,9 @@ import { useNavigation } from "@react-navigation/native";
 import Account from "./Account";
 import Login from "./Login";
 import Signup from "./Signup";
+import Order from "./Order";
+import Wishlist from "./Wishlist";
+import Product from '../Home/Product'
 
 const Stack = createStackNavigator();
 
@@ -31,6 +34,19 @@ export default function AccountScreen() {
       />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="Order" component={Order} />
+      <Stack.Screen name="Wishlist" component={Wishlist} />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={({ route }) => ({
+          title: route.params.sku,
+          headerTintColor: "black",
+          headerTitleStyle: {
+            textTransform: "capitalize",
+          },
+        })}
+      />
     </Stack.Navigator>
   );
 }
