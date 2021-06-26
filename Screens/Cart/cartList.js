@@ -2,14 +2,12 @@ import * as React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { useQuery } from "@apollo/client";
 
-import { GET_CART }  from "../../graphqlFunctions";
+import { GET_CART } from "../../graphqlFunctions";
 import Product from "../../Components/cartItem";
-import EmptyCart from "./emptyCart";
+import Empty from "../../Components/empty";
 import ActivityIndicator from "../../Components/activityIndicator";
 
 export default function CartScreen() {
-
-
   const id = "60ae5d2c7cd40e00155f7ec2";
 
   const { loading, data, refetch } = useQuery(GET_CART, {
@@ -21,7 +19,7 @@ export default function CartScreen() {
   }
 
   if (data.carts.length === 0) {
-    return <EmptyCart />;
+    return <Empty />;
   }
 
   const renderItem = ({ item }) => (
