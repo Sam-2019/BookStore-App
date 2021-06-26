@@ -95,3 +95,30 @@ export const SIGNUP = gql`
     }
   }
 `;
+
+export const GET_WISHLIST = gql`
+  query Wishlist($id: ID!) {
+    wishlist(id: $id) {
+      wishID
+      productID
+      name
+      sku
+      price
+      imageURL
+    }
+  }
+`;
+
+export const GET_ORDER = gql`
+  query UserOrder($id: ID!) {
+    userOrder(id: $id) {
+      id
+      name
+      sku
+      status
+      quantity
+      price
+      imageURL
+    }
+  }
+`;
