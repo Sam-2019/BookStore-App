@@ -4,7 +4,7 @@ import { Card, Button, Paragraph } from "react-native-paper";
 import { useRoute } from "@react-navigation/native";
 import { useQuery } from "@apollo/client";
 
-import { GET_PRODUCT }  from "../../graphqlFunctions";
+import { GET_PRODUCT }  from "../../utils/graphqlFunctions";
 import Error from "../../Components/error";
 import ActivityIndicator from "../../Components/activityIndicator";
 

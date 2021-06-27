@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Text, Pressable } from "react-native";
 import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
-import { DELETE_CART } from "../graphqlFunctions";
+import { DELETE_CART } from "../utils/graphqlFunctions";
 
 export default function CartItem({
   sku,

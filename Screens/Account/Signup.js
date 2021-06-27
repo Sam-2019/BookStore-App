@@ -4,7 +4,7 @@ import { TextInput, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 
-import { SIGNUP } from "../../graphqlFunctions";
+import { SIGNUP } from "../../utils/graphqlFunctions";
 
 export default function Signup() {
   const navigation = useNavigation();

@@ -3,7 +3,7 @@ import { StyleSheet, View, FlatList, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "@apollo/client";
 
-import { GET_PRODUCTS } from "../../graphqlFunctions";
+import { GET_PRODUCTS } from "../../utils/graphqlFunctions";
 import Product from "../../Components/productItem";
 import Error from "../../Components/error";
 import Empty from "../../Components/empty";

@@ -2,7 +2,7 @@ import * as React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { useQuery } from "@apollo/client";
 
-import { GET_WISHLIST } from "../../graphqlFunctions";
+import { GET_WISHLIST } from "../../utils/graphqlFunctions";
 import Product from "../../Components/cartItem";
 import Empty from "../../Components/empty";
 import ActivityIndicator from "../../Components/activityIndicator";
