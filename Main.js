@@ -34,10 +34,9 @@ export default function Main() {
             inactiveTintColor: "gray",
           }}
         >
-               <Tab.Screen name="Account" component={AccountStack} />
+          <Tab.Screen name="Account" component={AccountStack} />
           <Tab.Screen name="Cart" component={CartStack} />
           <Tab.Screen name="Home" component={HomeStack} />
-     
         </Tab.Navigator>
       </NavigationContainer>
     </PaperProvider>
