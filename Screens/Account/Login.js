@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useLazyQuery } from "@apollo/client";
+import { storeObjectData } from "../../utils/helper";
 
-import { LOGIN } from "../../graphqlFunctions";
+import { LOGIN } from "../../utils/graphqlFunctions";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -17,9 +18,12 @@ export default function Login() {
   };
 
   const [loginUser, { error }] = useLazyQuery(LOGIN, {
-    onCompleted: (data) => {
-      console.log(data);
-      clearForm();
+    onCompleted: async (data) => {
+      console.log(data.login);
+      await storeObjectData(data.login);
+      navigation.navigate("Home", { screen: "Products" });
+      //    clearForm();
+
       // store the token
       // localStorage.setItem('token', data.signUp);
       // update the local cache
@@ -35,10 +39,10 @@ export default function Login() {
   };
 
   const submit = async () => {
+    console.log(email, password);
     let empty = email && password;
 
     if (empty === "") {
-
     }
 
     if (empty !== "") {
@@ -64,8 +68,8 @@ export default function Login() {
           value={password}
           onChangeText={(password) => setPassword(password)}
           secureTextEntry
-      right={<TextInput.Icon name="eye" />}
-     />
+          right={<TextInput.Icon name="eye" />}
+        />
       </View>
 
       <View style={styles.button}>
