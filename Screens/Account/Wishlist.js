@@ -31,6 +31,7 @@ export default function WishlistScreen() {
         quantity={item.quantity}
         cartID={item.cartID}
         refetch={refetch}
+        showDelete={true}
       />
     </View>
   );

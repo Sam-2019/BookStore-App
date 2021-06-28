@@ -12,6 +12,7 @@ export default function CartItem({
   price,
   quantity,
   refetch,
+  showDelete,
 }) {
   const navigation = useNavigation();
 
@@ -59,9 +60,11 @@ export default function CartItem({
         </Pressable>
 
         <View style={styles.cardAction}>
-          <Button mode="outlined" onPress={deleteItem}>
-            Delete
-          </Button>
+          {showDelete && (
+            <Button mode="outlined" onPress={deleteItem}>
+              Delete
+            </Button>
+          )}
         </View>
       </View>
     </View>

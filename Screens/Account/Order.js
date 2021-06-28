@@ -31,6 +31,7 @@ export default function OrderScreen() {
         quantity={item.quantity}
         cartID={item.cartID}
         refetch={refetch}
+        showDelete={false}
       />
     </View>
   );
