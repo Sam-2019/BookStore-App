@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useLazyQuery } from "@apollo/client";
+
 import { storeObjectData } from "../../utils/helper";
 
 import { LOGIN } from "../../utils/graphqlFunctions";
@@ -19,9 +20,16 @@ export default function Login() {
 
   const [loginUser, { error }] = useLazyQuery(LOGIN, {
     onCompleted: async (data) => {
-      console.log(data.login);
-      await storeObjectData(data.login);
+      if (Platform.OS === "web") {
+        return (
+          await storeObjectData(data.login),
+          navigation.navigate("Home", { screen: "Products" })
+        );
+      }
+
+      await saveValueFor(data.login);
       navigation.navigate("Home", { screen: "Products" });
+
       //    clearForm();
 
       // store the token
