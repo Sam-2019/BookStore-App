@@ -1,8 +1,11 @@
 import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export async function save(key, value) {
-  await SecureStore.setItemAsync(key, value);
+export async function saveValueFor(value) {
+  const token = await value.token;
+  const userID = await value.user;
+  const jsonValue = JSON.stringify({ token: token, user: userID });
+  await SecureStore.setItemAsync("@storageKey", jsonValue);
 }
 
 export async function getValueFor(key) {
@@ -22,10 +25,13 @@ export const storeData = async (value) => {
     // saving error
   }
 };
+
 //Storing object value
 export const storeObjectData = async (value) => {
   try {
-    const jsonValue = JSON.stringify(value);
+    const token = value.token;
+    const userID = value.user;
+    const jsonValue = JSON.stringify({ token: token, user: userID });
     await AsyncStorage.setItem("@storage_Key", jsonValue);
   } catch (e) {
     // saving error
