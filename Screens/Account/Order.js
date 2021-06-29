@@ -10,7 +10,7 @@ import { getObjectData } from "../../utils/helper";
 
 export default function OrderScreen() {
   const find = getObjectData();
-  console.log(find);
+  //console.log(find);
   const id = "60ae5d2c7cd40e00155f7ec2";
 
   const { loading, data, refetch } = useQuery(GET_ORDER, {
