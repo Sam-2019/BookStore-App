@@ -23,14 +23,15 @@ export default function Login() {
       if (Platform.OS === "web") {
         return (
           await storeObjectData(data.login),
-          navigation.navigate("Home", { screen: "Products" })
+          navigation.navigate("Home", { screen: "Products" }),
+          clearForm()
         );
       }
 
       await saveValueFor(data.login);
       navigation.navigate("Home", { screen: "Products" });
 
-      //    clearForm();
+      clearForm();
 
       // store the token
       // localStorage.setItem('token', data.signUp);
