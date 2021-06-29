@@ -21,7 +21,7 @@ export default function Signup() {
   const [signupUser, { loading: Loading, error: Error, data: Data }] =
     useMutation(SIGNUP, {
       onCompleted: (data) => {
-        console.log(data);
+        navigation.navigate("Login");
         clearForm();
         // store the token
         // localStorage.setItem('token', data.signUp);
