@@ -11,14 +11,18 @@ import { getObjectData } from "../../utils/helper";
 export default function OrderScreen() {
   const find = getObjectData();
   //console.log(find);
-  const id = "60ae5d2c7cd40e00155f7ec2";
+  const id = "60eb7a15b834770015248bc4";
 
-  const { loading, data, refetch } = useQuery(GET_ORDER, {
+  const { loading,error, data, refetch } = useQuery(GET_ORDER, {
     variables: { id },
   });
 
   if (loading) {
     return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Error />;
   }
 
   if (data.userOrder.length === 0) {

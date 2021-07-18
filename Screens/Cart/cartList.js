@@ -3,20 +3,20 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { useQuery } from "@apollo/client";
 
 import { GET_CART } from "../../utils/graphqlFunctions";
-import { getObjectData } from "../../utils/helper";
 import Product from "../../Components/cartItem";
 import Empty from "../../Components/empty";
 import ActivityIndicator from "../../Components/activityIndicator";
 
 export default function CartScreen() {
-  const id = "60ae5d2c7cd40e00155f7ec2";
 
-  const { loading, data, refetch } = useQuery(GET_CART, {
-    variables: { id },
-  });
+  const { loading, error, data, refetch } = useQuery(GET_CART, {});
 
   if (loading) {
     return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Error />;
   }
 
   if (data.carts.length === 0) {
