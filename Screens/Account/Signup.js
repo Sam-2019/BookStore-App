@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 
 import { SIGNUP } from "../../utils/graphqlFunctions";
+import DialogBox from "../../Components/dialog";
 
 export default function Signup() {
   const navigation = useNavigation();
@@ -14,23 +15,12 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [visible, setVisible] = React.useState(false);
+  const hideDialog = () => setVisible(false);
+
   const login = () => {
     navigation.navigate("Login");
   };
-
-  const [signupUser, { loading: Loading, error: Error, data: Data }] =
-    useMutation(SIGNUP, {
-      onCompleted: (data) => {
-        navigation.navigate("Login");
-        clearForm();
-        // store the token
-        // localStorage.setItem('token', data.signUp);
-        // update the local cache
-        //  client.writeData({ data: { isLoggedIn: true } });
-        // redirect the user to the homepage
-        //  props.history.push('/');
-      },
-    });
 
   const clearForm = () => {
     setFirstName("");
@@ -39,32 +29,41 @@ export default function Signup() {
     setPassword("");
   };
 
+  const [signup, { loading, error, data }] = useMutation(SIGNUP, {
+    onCompleted: (data) => {
+      navigation.navigate("Login");
+      clearForm();
+    },
+  });
+
+
+
   const submit = async () => {
     let empty = firstName && lastName && email && password;
 
     if (empty === "") {
+      setVisible(true);
     }
 
     if (empty !== "") {
       try {
-        signupUser({
+        signup({
           variables: {
-            first_name: String(firstName),
-            last_name: String(lastName),
+            firstName: String(firstName),
+            lastName: String(lastName),
             email: String(email),
             password: String(password),
           },
         });
       } catch (error) {
         console.error(error);
-      } finally {
-        clearForm();
       }
     }
   };
 
   return (
     <View style={styles.container}>
+
       <View>
         <TextInput
           label="First Name"
@@ -92,15 +91,24 @@ export default function Signup() {
         />
       </View>
 
-      <View style={styles.button}>
-        <Button mode="contained" onPress={submit}>
-          Submit
+      <View style={styles.buttonContainer}>
+        <Button mode="contained" onPress={submit} loading={loading}>
+          {loading ? "Loading" : "Submit"}
         </Button>
 
         <Button mode="outline" onPress={login}>
           Login
         </Button>
       </View>
+
+
+      <DialogBox
+        visible={visible}
+        hideDialog={hideDialog}
+        title="Error"
+        text="Please fill an entries"
+        action="Okay"
+      />
     </View>
   );
 }
@@ -112,18 +120,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
-  text: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  header: {
-    alignSelf: "center",
-  },
-  header_text: {
-    fontSize: 30,
-  },
-  button: {
+
+  buttonContainer: {
     marginTop: 10,
   },
 });

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Platform } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useLazyQuery } from "@apollo/client";
 
 import { storeObjectData } from "../../utils/helper";
-
 import { LOGIN } from "../../utils/graphqlFunctions";
+import DialogBox from "../../Components/dialog";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -14,11 +14,19 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [visible, setVisible] = React.useState(false);
+  const hideDialog = () => setVisible(false);
+
   const signup = () => {
     navigation.navigate("Signup");
   };
 
-  const [loginUser, { error }] = useLazyQuery(LOGIN, {
+  const clearForm = () => {
+    setEmail("");
+    setPassword("");
+  };
+
+  const [login, { loading, error }] = useLazyQuery(LOGIN, {
     onCompleted: async (data) => {
       if (Platform.OS === "web") {
         return (
@@ -32,31 +40,19 @@ export default function Login() {
       navigation.navigate("Home", { screen: "Products" });
 
       clearForm();
-
-      // store the token
-      // localStorage.setItem('token', data.signUp);
-      // update the local cache
-      //  client.writeData({ data: { isLoggedIn: true } });
-      // redirect the user to the homepage
-      //  props.history.push('/');
     },
   });
 
-  const clearForm = () => {
-    setEmail("");
-    setPassword("");
-  };
-
   const submit = async () => {
-    console.log(email, password);
     let empty = email && password;
 
     if (empty === "") {
+      setVisible(true);
     }
 
     if (empty !== "") {
       try {
-        loginUser({ variables: { email, password } });
+        login({ variables: { email, password } });
       } catch (err) {
         console.log(err);
       }
@@ -66,29 +62,39 @@ export default function Login() {
   return (
     <View style={styles.container}>
       <View>
-        <TextInput
-          label="Email"
-          value={email}
-          onChangeText={(email) => setEmail(email)}
-        />
+        <View>
+          <TextInput
+            label="Email"
+            value={email}
+            onChangeText={(email) => setEmail(email)}
+          />
 
-        <TextInput
-          label="Password"
-          value={password}
-          onChangeText={(password) => setPassword(password)}
-          secureTextEntry
-          right={<TextInput.Icon name="eye" />}
-        />
+          <TextInput
+            label="Password"
+            value={password}
+            onChangeText={(password) => setPassword(password)}
+            secureTextEntry
+            right={<TextInput.Icon name="eye" />}
+          />
+        </View>
+
+        <View style={styles.button}>
+          <Button mode="contained" onPress={submit} loading={loading}>
+            {loading ? "Loading" : "Submit"}
+          </Button>
+          <Button mode="outline" onPress={signup}>
+            Signup
+          </Button>
+        </View>
       </View>
 
-      <View style={styles.button}>
-        <Button mode="contained" onPress={submit}>
-          Submit
-        </Button>
-        <Button mode="outline" onPress={signup}>
-          Signup
-        </Button>
-      </View>
+      <DialogBox
+        visible={visible}
+        hideDialog={hideDialog}
+        title="Error"
+        text="Please fill an entries"
+        action="Okay"
+      />
     </View>
   );
 }
@@ -100,18 +106,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
-  text: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  header: {
-    alignSelf: "center",
-  },
-  header_text: {
-    fontSize: 30,
-  },
-  button: {
+  buttonContainer: {
     marginTop: 10,
   },
 });
