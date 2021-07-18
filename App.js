@@ -1,14 +1,35 @@
 import * as React from "react";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import * as SecureStore from "expo-secure-store";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import Main from "./Main";
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: "https://new-ecommerce-be.herokuapp.com/graphql",
-  cache: new InMemoryCache(),
+});
+
+const authLink = setContext((_, { headers }) => {
+  const result = JSON.parse(SecureStore.getItemAsync(key));
+
+  return {
+    headers: {
+      ...headers,
+      authorization: result ? `Bearer ${result}` : "",
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache({}),
 });
 
 export default function App() {
-
   return (
     <ApolloProvider client={client}>
       <Main />
