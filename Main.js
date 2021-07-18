@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Provider as PaperProvider } from "react-native-paper";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -10,9 +10,20 @@ import AccountStack from "./Screens/Account/AccountStack";
 
 const Tab = createBottomTabNavigator();
 
+const theme = {
+  ...DefaultTheme,
+  roundness: 3,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "green",
+    accent: "yellow",
+    placeholder: "green",
+  },
+};
+
 export default function Main() {
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
