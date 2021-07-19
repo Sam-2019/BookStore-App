@@ -8,11 +8,8 @@ import Empty from "../../Components/empty";
 import ActivityIndicator from "../../Components/activityIndicator";
 
 export default function WishlistScreen() {
-  const id = "60eb7a15b834770015248bc4";
 
-  const { loading, error, data, refetch } = useQuery(GET_WISHLIST, {
-    variables: { id },
-  });
+  const { loading, error, data, refetch } = useQuery(GET_WISHLIST);
 
   if (loading) {
     return <ActivityIndicator />;
