@@ -39,6 +39,10 @@ export default function Signup() {
 
 
   const submit = async () => {
+
+console.log(firstName, lastName, email, password)
+
+
     let empty = firstName && lastName && email && password;
 
     if (empty === "") {
