@@ -1,5 +1,9 @@
 import * as React from "react";
-import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import {
+  configureFonts,
+  DefaultTheme,
+  Provider as PaperProvider,
+} from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -10,9 +14,67 @@ import AccountStack from "./Screens/Account/AccountStack";
 
 const Tab = createBottomTabNavigator();
 
+const fontConfig = {
+  web: {
+    regular: {
+      fontFamily: "sans-serif",
+      fontWeight: "normal",
+    },
+    medium: {
+      fontFamily: "sans-serif-medium",
+      fontWeight: "normal",
+    },
+    light: {
+      fontFamily: "sans-serif-light",
+      fontWeight: "normal",
+    },
+    thin: {
+      fontFamily: "sans-serif-thin",
+      fontWeight: "normal",
+    },
+  },
+  ios: {
+    regular: {
+      fontFamily: "sans-serif",
+      fontWeight: "normal",
+    },
+    medium: {
+      fontFamily: "sans-serif-medium",
+      fontWeight: "normal",
+    },
+    light: {
+      fontFamily: "sans-serif-light",
+      fontWeight: "normal",
+    },
+    thin: {
+      fontFamily: "sans-serif-thin",
+      fontWeight: "normal",
+    },
+  },
+  android: {
+    regular: {
+      fontFamily: "sans-serif",
+      fontWeight: "normal",
+    },
+    medium: {
+      fontFamily: "sans-serif-medium",
+      fontWeight: "normal",
+    },
+    light: {
+      fontFamily: "sans-serif-light",
+      fontWeight: "normal",
+    },
+    thin: {
+      fontFamily: "sans-serif-thin",
+      fontWeight: "normal",
+    },
+  },
+};
+
 const theme = {
   ...DefaultTheme,
   roundness: 3,
+  fonts: configureFonts(fontConfig),
   colors: {
     ...DefaultTheme.colors,
     primary: "green",
