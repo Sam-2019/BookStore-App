@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Button } from "react-native-paper";
+import { useTheme, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 import Account from "./Account";
@@ -8,12 +8,13 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Order from "./Order";
 import Wishlist from "./Wishlist";
-import Product from '../Home/Product'
+import Product from "../Home/Product";
 
 const Stack = createStackNavigator();
 
 export default function AccountScreen() {
   const navigation = useNavigation();
+  const { roundness } = useTheme();
 
   const login = () => {
     navigation.navigate("Login");
@@ -26,7 +27,7 @@ export default function AccountScreen() {
         component={Account}
         options={{
           headerRight: () => (
-            <Button mode="contained" onPress={login}>
+            <Button mode="contained" onPress={login} raised style={roundness}>
               Login
             </Button>
           ),
