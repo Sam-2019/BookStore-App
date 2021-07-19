@@ -28,16 +28,17 @@ export default function Login() {
 
   const [login, { loading, error }] = useLazyQuery(LOGIN, {
     onCompleted: async (data) => {
-      if (Platform.OS === "web") {
-        return (
-          await storeObjectData(data.login),
-          navigation.navigate("Home", { screen: "Products" }),
-          clearForm()
-        );
-      }
+      console.log(data);
+      // if (Platform.OS === "web") {
+      //   return (
+      //     await storeObjectData(data.login),
+      //     navigation.navigate("Home", { screen: "Products" }),
+      //     clearForm()
+      //   );
+      // }
 
-      await saveValueFor(data.login);
-      navigation.navigate("Home", { screen: "Products" });
+      // await saveValueFor(data.login);
+      // navigation.navigate("Home", { screen: "Products" });
 
       clearForm();
     },
