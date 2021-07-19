@@ -1,6 +1,8 @@
 import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
+//SecureStore doesnt work on web
 export async function saveValueFor(value) {
   const token = await value.token;
   const userID = await value.user;
