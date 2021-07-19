@@ -8,8 +8,9 @@ import Empty from "../../Components/empty";
 import ActivityIndicator from "../../Components/activityIndicator";
 
 export default function CartScreen() {
+  const { loading, error, data, refetch } = useQuery(GET_CART);
 
-  const { loading, error, data, refetch } = useQuery(GET_CART, {});
+  console.log(data)
 
   if (loading) {
     return <ActivityIndicator />;
