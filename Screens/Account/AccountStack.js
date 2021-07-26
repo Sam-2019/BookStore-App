@@ -27,7 +27,13 @@ export default function AccountScreen() {
         component={Account}
         options={{
           headerRight: () => (
-            <Button mode="contained" onPress={login} raised style={roundness}>
+            <Button
+              mode="contained"
+              onPress={login}
+              raised
+              style={roundness}
+              style={{ marginRight: 10 }}
+            >
               Login
             </Button>
           ),
