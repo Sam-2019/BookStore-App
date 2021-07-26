@@ -1,9 +1,13 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Modal, Portal, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import MenuItem from "../../Components/menuItem";
+import ModalBox from "../../Components/modal";
 
 export default function Account() {
   const navigation = useNavigation();
+
+  const [visible, setVisible] = React.useState(false);
 
   const order = () => {
     navigation.navigate("Order");
@@ -12,39 +16,31 @@ export default function Account() {
   const wishlist = () => {
     navigation.navigate("Wishlist");
   };
-  
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+
   return (
     <View style={styles.container}>
-      <View style={styles.item}>
-        <Pressable onPress={order}>
-          <Text style={styles.text}>Orders</Text>
-        </Pressable>
-      </View>
+      <MenuItem action={order} text="Order" />
+      <MenuItem action={wishlist} text="WishList" />
+      <MenuItem action={showModal} text="Change Name" />
+      <MenuItem action={wishlist} text="Change Email" />
+      <MenuItem text="Change Password" />
+      <MenuItem text="Logout" />
 
-      <View style={styles.item}>
-        <Pressable onPress={wishlist}>
-          <Text style={styles.text}>Wishlist</Text>
-        </Pressable>
-      </View>
+      <ModalBox
+        showModal={showModal}
+        hideModal={hideModal}
+        visible={visible}
+        setVisible={setVisible}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 8,
-  },
-  item: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "white",
-    marginBottom: 8,
-    marginRight: 10,
-    marginLeft: 10,
-    borderRadius: 10,
-    padding: 10,
-  },
-  text: {
-    fontSize: 20,
+    marginTop: 15,
   },
 });
