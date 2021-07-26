@@ -36,12 +36,8 @@ export default function Signup() {
     },
   });
 
-
-
   const submit = async () => {
-
-console.log(firstName, lastName, email, password)
-
+    console.log(firstName, lastName, email, password);
 
     let empty = firstName && lastName && email && password;
 
@@ -67,7 +63,6 @@ console.log(firstName, lastName, email, password)
 
   return (
     <View style={styles.container}>
-
       <View>
         <TextInput
           label="First Name"
@@ -104,7 +99,6 @@ console.log(firstName, lastName, email, password)
           Login
         </Button>
       </View>
-
 
       <DialogBox
         visible={visible}
