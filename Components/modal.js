@@ -1,8 +1,9 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { Portal, Modal } from "react-native-paper";
+import { StyleSheet } from "react-native";
+import { Portal, Modal, Button } from "react-native-paper";
+import Spacer from "../Components/spacer";
 
-const ModalBox = ({ hideModal, visible }) => {
+const ModalBox = ({ hideModal, visible, children }) => {
   return (
     <Portal>
       <Modal
@@ -10,7 +11,11 @@ const ModalBox = ({ hideModal, visible }) => {
         onDismiss={hideModal}
         contentContainerStyle={styles.containerStyle}
       >
-        <Text>Example Modal. Click outside this area to dismiss.</Text>
+        {children}
+        <Spacer />
+        <Button mode="outline" onPress={hideModal}>
+          Cancel
+        </Button>
       </Modal>
     </Portal>
   );
